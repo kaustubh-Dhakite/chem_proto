@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preparation of Hand Sanitizer – Chemistry Project</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0b1f3a;
+    --blue: #1a5fa8;
+    --sky: #3b9edd;
+    --accent: #00c2cb;
+    --light: #e8f4fd;
+    --white: #ffffff;
+    --gray: #f0f6fc;
+    --text: #1a2b40;
+    --muted: #6b8299;
+    --border: #cde3f5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(11,31,58,0.95);
+    backdrop-filter: blur(12px);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  nav .logo {
+    font-family: 'Playfair Display', serif;
+    color: var(--white); font-size: 1rem; letter-spacing: .5px;
+  }
+  nav ul { list-style: none; display: flex; gap: 1.6rem; }
+  nav ul li a {
+    color: rgba(255,255,255,0.72); font-size: .82rem; font-weight: 500;
+    text-decoration: none; letter-spacing: .4px; transition: color .2s;
+  }
+  nav ul li a:hover { color: var(--accent); }
+
+  /* ── SECTIONS ── */
+  section { padding: 90px 6vw 80px; }
+  section:nth-child(even) { background: var(--gray); }
+
+  .section-label {
+    display: inline-block;
+    font-size: .72rem; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--sky);
+    margin-bottom: .6rem;
+  }
+  h2.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.7rem, 3vw, 2.4rem);
+    color: var(--navy); margin-bottom: 2.5rem; line-height: 1.25;
+  }
+  h2.section-title span { color: var(--blue); }
+
+  /* ── HERO ── */
+  #home {
+    min-height: 100vh; padding: 0;
+    background: var(--navy);
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(26,95,168,0.35) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 80% 70%, rgba(0,194,203,0.12) 0%, transparent 60%);
+  }
+  /* floating molecules */
+  .mol {
+    position: absolute; border-radius: 50%;
+    opacity: .09; animation: float 8s ease-in-out infinite;
+  }
+  .mol1 { width: 380px; height: 380px; background: var(--sky); top: -80px; left: -80px; animation-delay: 0s; }
+  .mol2 { width: 220px; height: 220px; background: var(--accent); bottom: 60px; right: 5%; animation-delay: 3s; }
+  .mol3 { width: 140px; height: 140px; background: var(--blue); top: 35%; left: 5%; animation-delay: 1.5s; }
+  /* hex grid overlay */
+  .hex-grid {
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='104' viewBox='0 0 60 104'%3E%3Cpolygon points='30,2 58,17 58,47 30,62 2,47 2,17' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='1'/%3E%3Cpolygon points='30,54 58,69 58,99 30,114 2,99 2,69' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='1'/%3E%3C/svg%3E");
+    background-size: 60px 104px;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-18px) scale(1.03); }
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 760px; padding: 0 2rem; }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(0,194,203,0.15); border: 1px solid rgba(0,194,203,0.35);
+    color: var(--accent); font-size: .75rem; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: .35rem 1rem; border-radius: 20px; margin-bottom: 1.4rem;
+  }
+  .hero-content h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5.5vw, 4rem);
+    color: var(--white); line-height: 1.18; margin-bottom: 1.1rem;
+  }
+  .hero-content h1 em { font-style: normal; color: var(--accent); }
+  .hero-content p {
+    font-size: 1.05rem; color: rgba(255,255,255,0.68);
+    font-weight: 300; max-width: 540px; margin: 0 auto 2.5rem; line-height: 1.7;
+  }
+  .hero-scroll {
+    width: 36px; height: 56px; border: 2px solid rgba(255,255,255,0.2);
+    border-radius: 18px; margin: 2.5rem auto 0;
+    display: flex; justify-content: center; align-items: flex-start; padding-top: 8px;
+  }
+  .hero-scroll span {
+    width: 4px; height: 10px; background: var(--accent);
+    border-radius: 2px; animation: scrollDot 1.6s ease-in-out infinite;
+  }
+  @keyframes scrollDot { 0%,100%{transform:translateY(0);opacity:1} 70%{transform:translateY(18px);opacity:0} }
+
+  /* members */
+  .members-strip {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2.2rem;
+  }
+  .member-pill {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 30px; padding: .45rem 1rem;
+    display: flex; align-items: center; gap: .5rem;
+  }
+  .member-pill .num {
+    font-size: .68rem; font-weight: 700; color: var(--accent);
+    background: rgba(0,194,203,0.15); border-radius: 50%;
+    width: 22px; height: 22px; display: flex; align-items: center; justify-content: center;
+  }
+  .member-pill span { font-size: .78rem; color: rgba(255,255,255,0.75); font-weight: 400; }
+
+  /* ── CHEMICALS ── */
+  .chem-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1.4rem;
+  }
+  .chem-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.8rem 1.5rem;
+    transition: transform .25s, box-shadow .25s;
+    position: relative; overflow: hidden;
+  }
+  .chem-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--blue), var(--accent));
+  }
+  .chem-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(26,95,168,.12); }
+  .chem-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: var(--light); display: flex; align-items: center;
+    justify-content: center; font-size: 1.4rem; margin-bottom: 1rem;
+  }
+  .chem-card h3 { font-size: .98rem; font-weight: 600; color: var(--navy); margin-bottom: .3rem; }
+  .chem-card .formula { font-size: .78rem; color: var(--sky); font-weight: 600; margin-bottom: .8rem; }
+  .chem-card .prop-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: .4rem 0; border-bottom: 1px solid var(--border); font-size: .8rem;
+  }
+  .chem-card .prop-row:last-child { border: none; }
+  .prop-key { color: var(--muted); }
+  .prop-val { font-weight: 600; color: var(--navy); }
+  .prop-val.highlight {
+    background: var(--light); color: var(--blue);
+    padding: .15rem .5rem; border-radius: 20px; font-size: .75rem;
+  }
+
+  /* ── PROCEDURE ── */
+  .timeline { max-width: 700px; margin: 0 auto; position: relative; }
+  .timeline::before {
+    content: ''; position: absolute; left: 28px; top: 0; bottom: 0; width: 2px;
+    background: linear-gradient(to bottom, var(--blue), var(--accent));
+  }
+  .t-step {
+    display: flex; gap: 1.4rem; margin-bottom: 2.2rem; align-items: flex-start;
+    opacity: 0; transform: translateX(-20px); transition: opacity .5s, transform .5s;
+  }
+  .t-step.visible { opacity: 1; transform: translateX(0); }
+  .t-num {
+    width: 56px; height: 56px; min-width: 56px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue), var(--sky));
+    color: var(--white); font-size: 1.1rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 14px rgba(26,95,168,.3); position: relative; z-index: 1;
+  }
+  .t-body { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.4rem; flex: 1; }
+  .t-body h4 { font-size: .95rem; font-weight: 600; color: var(--navy); margin-bottom: .35rem; }
+  .t-body p { font-size: .85rem; color: var(--muted); line-height: 1.65; }
+
+  /* ── BLOCK DIAGRAM ── */
+  .flow-wrap {
+    display: flex; align-items: center; justify-content: center;
+    flex-wrap: wrap; gap: .5rem; margin-top: 1rem;
+  }
+  .flow-box {
+    background: var(--white); border: 2px solid var(--border);
+    border-radius: 10px; padding: 1rem 1.3rem; text-align: center;
+    min-width: 110px; transition: border-color .25s, box-shadow .25s;
+  }
+  .flow-box:hover { border-color: var(--sky); box-shadow: 0 6px 20px rgba(59,158,221,.12); }
+  .flow-box .ficon { font-size: 1.5rem; margin-bottom: .4rem; }
+  .flow-box .flabel { font-size: .78rem; font-weight: 600; color: var(--navy); }
+  .flow-box .fsub { font-size: .68rem; color: var(--muted); margin-top: .15rem; }
+  .flow-box.start { border-color: var(--blue); background: var(--light); }
+  .flow-box.end { border-color: var(--accent); background: rgba(0,194,203,0.06); }
+  .arrow {
+    font-size: 1.3rem; color: var(--sky); font-weight: 700;
+  }
+  .flow-sub {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem; margin-top: 2rem;
+  }
+  .flow-sub-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1rem 1.2rem;
+    display: flex; gap: .8rem; align-items: flex-start;
+  }
+  .flow-sub-card .fs-icon { font-size: 1.3rem; }
+  .flow-sub-card h5 { font-size: .83rem; font-weight: 600; color: var(--navy); }
+  .flow-sub-card p { font-size: .76rem; color: var(--muted); line-height: 1.5; }
+
+  /* ── VIDEO ── */
+  .video-wrap {
+    max-width: 760px; margin: 0 auto;
+    background: var(--navy); border-radius: 16px; overflow: hidden;
+    box-shadow: 0 24px 60px rgba(11,31,58,.25);
+  }
+  .video-header {
+    padding: 1rem 1.5rem;
+    display: flex; align-items: center; gap: .8rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .video-header .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-r { background: #ff5f57; }
+  .dot-y { background: #ffbd2e; }
+  .dot-g { background: #28c840; }
+  .video-header span { font-size: .8rem; color: rgba(255,255,255,0.5); margin-left: .5rem; }
+  .video-frame {
+    position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+  }
+  .video-frame iframe {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;
+  }
+
+  /* ── APPLICATIONS ── */
+  .app-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1.2rem;
+  }
+  .app-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.6rem 1.3rem; text-align: center;
+    transition: transform .25s, box-shadow .25s;
+  }
+  .app-card:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(26,95,168,.1); }
+  .app-icon { font-size: 2rem; margin-bottom: .8rem; }
+  .app-card h4 { font-size: .9rem; font-weight: 600; color: var(--navy); margin-bottom: .4rem; }
+  .app-card p { font-size: .78rem; color: var(--muted); line-height: 1.55; }
+
+  /* ── ADV/DISADV ── */
+  .compare-table { width: 100%; border-collapse: collapse; max-width: 780px; margin: 0 auto; }
+  .compare-table thead tr { background: var(--navy); }
+  .compare-table thead th { color: var(--white); padding: .9rem 1.2rem; font-size: .85rem; font-weight: 600; text-align: left; }
+  .compare-table thead th:first-child { border-radius: 10px 0 0 0; }
+  .compare-table thead th:last-child { border-radius: 0 10px 0 0; }
+  .compare-table tbody tr:nth-child(odd) td { background: var(--light); }
+  .compare-table tbody tr:nth-child(even) td { background: var(--white); }
+  .compare-table td { padding: .8rem 1.2rem; font-size: .83rem; border-bottom: 1px solid var(--border); }
+  .adv-item { display: flex; align-items: flex-start; gap: .5rem; }
+  .adv-item .badge { min-width: 20px; height: 20px; border-radius: 50%; font-size: .65rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+  .badge.plus { background: rgba(0,194,203,0.15); color: var(--accent); }
+  .badge.minus { background: rgba(239,68,68,0.1); color: #ef4444; }
+
+  /* ── FAQ ── */
+  .faq-list { max-width: 700px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-q {
+    width: 100%; background: none; border: none; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.1rem 0; text-align: left;
+    font-family: 'DM Sans', sans-serif; font-size: .9rem; font-weight: 600; color: var(--navy);
+  }
+  .faq-q .chevron {
+    width: 24px; height: 24px; border-radius: 50%; background: var(--light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: .75rem; color: var(--blue); transition: transform .3s;
+    flex-shrink: 0; margin-left: 1rem;
+  }
+  .faq-q.open .chevron { transform: rotate(180deg); background: var(--blue); color: var(--white); }
+  .faq-a {
+    max-height: 0; overflow: hidden; transition: max-height .35s ease, padding .35s;
+    font-size: .84rem; color: var(--muted); line-height: 1.7;
+  }
+  .faq-a.open { max-height: 200px; padding-bottom: 1rem; }
+
+  /* ── MECHANISM ── */
+  .mech-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.4rem; margin-bottom: 2.5rem;
+  }
+  .mech-card {
+    background: var(--white); border-radius: 14px; padding: 1.5rem 1.4rem;
+    border-left: 4px solid var(--blue);
+    box-shadow: 0 4px 18px rgba(26,95,168,.07);
+  }
+  .mech-card .micon { font-size: 1.6rem; margin-bottom: .7rem; }
+  .mech-card h4 { font-size: .9rem; font-weight: 600; color: var(--navy); margin-bottom: .4rem; }
+  .mech-card p { font-size: .8rem; color: var(--muted); line-height: 1.6; }
+  .reaction-box {
+    background: var(--navy); border-radius: 14px; padding: 1.8rem 2rem;
+    color: var(--white); max-width: 700px; margin: 0 auto; text-align: center;
+  }
+  .reaction-box .rlabel { font-size: .72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: .8rem; }
+  .reaction-box .rtext { font-size: 1rem; font-weight: 500; line-height: 1.8; }
+  .reaction-box .rtext sup { font-size: .65rem; }
+  .reaction-box small { font-size: .75rem; color: rgba(255,255,255,0.45); margin-top: .8rem; display: block; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy); color: rgba(255,255,255,0.45);
+    text-align: center; padding: 2rem; font-size: .8rem;
+  }
+  footer span { color: var(--accent); }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    nav ul { display: none; }
+    section { padding: 70px 5vw 60px; }
+    .flow-wrap { flex-direction: column; align-items: center; }
+    .arrow { transform: rotate(90deg); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">⚗ Hand Sanitizer Project</div>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#chemicals">Chemicals</a></li>
+    <li><a href="#procedure">Procedure</a></li>
+    <li><a href="#diagram">Diagram</a></li>
+    <li><a href="#video">Video</a></li>
+    <li><a href="#applications">Applications</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#mechanism">Mechanism</a></li>
+  </ul>
+</nav>
+
+<!-- HOME -->
+<section id="home">
+  <div class="hex-grid"></div>
+  <div class="hero-bg"></div>
+  <div class="mol mol1"></div>
+  <div class="mol mol2"></div>
+  <div class="mol mol3"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Chemistry Prototyping Project · 2026</div>
+    <h1>Preparation of Hand <em>Sanitizer</em></h1>
+    <p>A comprehensive study on formulating WHO-standard hand sanitizer — exploring the chemistry of antimicrobial agents, proportions, and synthesis techniques.</p>
+    <div class="members-strip">
+      <div class="member-pill"><div class="num">343</div><span>Pratiksha Sawant &nbsp;·&nbsp; 202401040351</span></div>
+      <div class="member-pill"><div class="num">348</div><span>Sonal Vijay Singh &nbsp;·&nbsp; 202401040374</span></div>
+      <div class="member-pill"><div class="num">349</div><span>Rutuja Bankar &nbsp;·&nbsp; 202401040377</span></div>
+    </div>
+    <div class="hero-scroll"><span></span></div>
+  </div>
+</section>
+
+<!-- CHEMICALS -->
+<section id="chemicals">
+  <div class="reveal">
+    <div class="section-label">Ingredients</div>
+    <h2 class="section-title">Chemicals <span>Used</span></h2>
+  </div>
+  <div class="chem-grid reveal">
+    <div class="chem-card">
+      <div class="chem-icon">🧪</div>
+      <h3>Ethanol</h3>
+      <div class="formula">C₂H₅OH</div>
+      <div class="prop-row"><span class="prop-key">Role</span><span class="prop-val">Active antiseptic</span></div>
+      <div class="prop-row"><span class="prop-key">WHO Proportion</span><span class="prop-val highlight">96% v/v → 75.15 ml</span></div>
+      <div class="prop-row"><span class="prop-key">Purity</span><span class="prop-val">96% v/v</span></div>
+      <div class="prop-row"><span class="prop-key">Function</span><span class="prop-val">Kills 99.9% bacteria</span></div>
+    </div>
+    <div class="chem-card">
+      <div class="chem-icon">💧</div>
+      <h3>Glycerol</h3>
+      <div class="formula">C₃H₈O₃</div>
+      <div class="prop-row"><span class="prop-key">Role</span><span class="prop-val">Humectant / emollient</span></div>
+      <div class="prop-row"><span class="prop-key">Proportion</span><span class="prop-val highlight">1.45 ml per 100 ml</span></div>
+      <div class="prop-row"><span class="prop-key">Grade</span><span class="prop-val">98% Pharmaceutical</span></div>
+      <div class="prop-row"><span class="prop-key">Function</span><span class="prop-val">Prevents skin dryness</span></div>
+    </div>
+    <div class="chem-card">
+      <div class="chem-icon">⚗️</div>
+      <h3>Hydrogen Peroxide</h3>
+      <div class="formula">H₂O₂</div>
+      <div class="prop-row"><span class="prop-key">Role</span><span class="prop-val">Preservative / sterilizer</span></div>
+      <div class="prop-row"><span class="prop-key">Proportion</span><span class="prop-val highlight">0.125 ml per 100 ml</span></div>
+      <div class="prop-row"><span class="prop-key">Grade</span><span class="prop-val">3% v/v</span></div>
+      <div class="prop-row"><span class="prop-key">Function</span><span class="prop-val">Inactivates spores</span></div>
+    </div>
+    <div class="chem-card">
+      <div class="chem-icon">🔬</div>
+      <h3>Distilled Water</h3>
+      <div class="formula">H₂O</div>
+      <div class="prop-row"><span class="prop-key">Role</span><span class="prop-val">Solvent / diluent</span></div>
+      <div class="prop-row"><span class="prop-key">Proportion</span><span class="prop-val highlight">Make up to 100 ml</span></div>
+      <div class="prop-row"><span class="prop-key">Grade</span><span class="prop-val">Sterile / deionized</span></div>
+      <div class="prop-row"><span class="prop-key">Function</span><span class="prop-val">Balances concentration</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCEDURE -->
+<section id="procedure">
+  <div class="reveal">
+    <div class="section-label">Step-by-Step</div>
+    <h2 class="section-title">Preparation <span>Procedure</span></h2>
+  </div>
+  <div class="timeline">
+    <div class="t-step">
+      <div class="t-num">1</div>
+      <div class="t-body">
+        <h4>🧴 Gather Materials & Equipment</h4>
+        <p>Collect a 1-litre graduated bottle, ethanol (96%), hydrogen peroxide (3%), glycerol (98%), and sterile distilled water. Ensure all glassware is clean and dry before starting.</p>
+      </div>
+    </div>
+    <div class="t-step">
+      <div class="t-num">2</div>
+      <div class="t-body">
+        <h4>🔬 Pour Ethanol into Mixing Vessel</h4>
+        <p>Measure and pour <strong>75.15 ml</strong> of 96% ethanol into the graduated mixing bottle. This forms the primary antimicrobial base of the formulation.</p>
+      </div>
+    </div>
+    <div class="t-step">
+      <div class="t-num">3</div>
+      <div class="t-body">
+        <h4>⚗️ Add Hydrogen Peroxide</h4>
+        <p>Add <strong>4.17 ml</strong> of 3% hydrogen peroxide to the bottle. This deactivates potential contaminating spores in the formulation container.</p>
+      </div>
+    </div>
+    <div class="t-step">
+      <div class="t-num">4</div>
+      <div class="t-body">
+        <h4>💧 Add Glycerol</h4>
+        <p>Carefully add <strong>1.45 ml</strong> of 98% glycerol using a sterile measuring pipette. Glycerol is viscous — rinse the measuring pipette with sterile distilled water once or twice.</p>
+      </div>
+    </div>
+    <div class="t-step">
+      <div class="t-num">5</div>
+      <div class="t-body">
+        <h4>🌊 Top Up with Distilled Water</h4>
+        <p>Add sterile distilled water to bring the total volume up to <strong>100 ml</strong>. Use the graduation marks on the bottle for precision.</p>
+      </div>
+    </div>
+    <div class="t-step">
+      <div class="t-num">6</div>
+      <div class="t-body">
+        <h4>🔄 Mix Thoroughly</h4>
+        <p>Immediately cap the bottle and shake it gently but thoroughly for 30–45 seconds. This ensures even distribution of all components in the final mixture.</p>
+      </div>
+    </div>
+    <div class="t-step">
+      <div class="t-num">7</div>
+      <div class="t-body">
+        <h4>⏳ Quarantine for 72 Hours</h4>
+        <p>Set aside the filled bottle(s) for at least <strong>72 hours</strong> before use. This quarantine period allows hydrogen peroxide to act on any bacterial spores in the bottles.</p>
+      </div>
+    </div>
+    <div class="t-step">
+      <div class="t-num">8</div>
+      <div class="t-body">
+        <h4>🏷️ Label & Store</h4>
+        <p>Label the product with composition, date of preparation, batch number, and expiry date. Store in a cool, dry place away from direct sunlight and heat sources.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOCK DIAGRAM -->
+<section id="diagram">
+  <div class="reveal">
+    <div class="section-label">Visual Flow</div>
+    <h2 class="section-title">Block <span>Diagram</span></h2>
+  </div>
+  <div class="flow-wrap reveal">
+    <div class="flow-box start">
+      <div class="ficon">🧪</div>
+      <div class="flabel">Raw Materials</div>
+      <div class="fsub">Ethanol · H₂O₂ · Glycerol · H₂O</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="flow-box">
+      <div class="ficon">⚗️</div>
+      <div class="flabel">Measuring</div>
+      <div class="fsub">Precise proportioning</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="flow-box">
+      <div class="ficon">🔄</div>
+      <div class="flabel">Mixing</div>
+      <div class="fsub">Sequential addition</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="flow-box">
+      <div class="ficon">🌀</div>
+      <div class="flabel">Stirring</div>
+      <div class="fsub">Homogeneous blend</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="flow-box">
+      <div class="ficon">⏳</div>
+      <div class="flabel">Quarantine</div>
+      <div class="fsub">72-hr hold period</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="flow-box end">
+      <div class="ficon">✅</div>
+      <div class="flabel">Final Product</div>
+      <div class="fsub">Ready-to-use sanitizer</div>
+    </div>
+  </div>
+  <div class="flow-sub reveal">
+    <div class="flow-sub-card">
+      <div class="fs-icon">🛡️</div>
+      <div>
+        <h5>Quality Control</h5>
+        <p>Check alcohol content (≥70%), clarity, and pH before approving the batch for use.</p>
+      </div>
+    </div>
+    <div class="flow-sub-card">
+      <div class="fs-icon">📦</div>
+      <div>
+        <h5>Packaging</h5>
+        <p>Transfer to pump-dispenser or squeeze bottles. Seal tightly to prevent evaporation.</p>
+      </div>
+    </div>
+    <div class="flow-sub-card">
+      <div class="fs-icon">🏷️</div>
+      <div>
+        <h5>Labelling</h5>
+        <p>Include composition, manufacture date, batch number, and safety warnings on label.</p>
+      </div>
+    </div>
+    <div class="flow-sub-card">
+      <div class="fs-icon">📦</div>
+      <div>
+        <h5>Storage</h5>
+        <p>Store below 25°C, away from flame, sunlight, and sparks. Keep cap closed when not in use.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section id="video">
+  <div class="reveal">
+    <div class="section-label">Demonstration</div>
+    <h2 class="section-title">Project <span>Video</span></h2>
+  </div>
+  <div class="video-wrap reveal">
+    <div class="video-header">
+      <div class="dot dot-r"></div>
+      <div class="dot dot-y"></div>
+      <div class="dot dot-g"></div>
+      <span>Project Demonstration — Preparation of Hand Sanitizer</span>
+    </div>
+    <div class="video-frame">
+      <video id="myVideo" controls style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;">
+        <source src="chem_vid.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+</section>
+
+<!-- APPLICATIONS -->
+<section id="applications">
+  <div class="reveal">
+    <div class="section-label">Uses</div>
+    <h2 class="section-title">Applications of <span>Hand Sanitizer</span></h2>
+  </div>
+  <div class="app-grid reveal">
+    <div class="app-card">
+      <div class="app-icon">🏥</div>
+      <h4>Hospitals & Clinics</h4>
+      <p>Used by healthcare workers between patient interactions to prevent hospital-acquired infections and cross-contamination.</p>
+    </div>
+    <div class="app-card">
+      <div class="app-icon">🏠</div>
+      <h4>Home Use</h4>
+      <p>Convenient for disinfecting hands before meals, after outdoor contact, or when soap and water are unavailable.</p>
+    </div>
+    <div class="app-card">
+      <div class="app-icon">✈️</div>
+      <h4>Travel</h4>
+      <p>Compact and portable for airports, trains, and transit hubs where hygiene facilities may be limited.</p>
+    </div>
+    <div class="app-card">
+      <div class="app-icon">🏫</div>
+      <h4>Schools & Colleges</h4>
+      <p>Deployed at entry points and classrooms to reduce spread of seasonal illnesses among students and staff.</p>
+    </div>
+    <div class="app-card">
+      <div class="app-icon">🍽️</div>
+      <h4>Food Industry</h4>
+      <p>Food handlers use it to maintain hygiene standards and prevent microbial contamination in food preparation areas.</p>
+    </div>
+    <div class="app-card">
+      <div class="app-icon">🏢</div>
+      <h4>Offices & Workplaces</h4>
+      <p>Placed at reception desks, meeting rooms, and shared equipment stations to promote employee wellness.</p>
+    </div>
+    <div class="app-card">
+      <div class="app-icon">🛒</div>
+      <h4>Retail & Public Spaces</h4>
+      <p>Supermarkets, shopping centres, and public venues use dispensers at entry and exit points for mass hygiene.</p>
+    </div>
+    <div class="app-card">
+      <div class="app-icon">🌍</div>
+      <h4>Emergency & Disaster Relief</h4>
+      <p>Critical in disaster zones or refugee camps where clean water is scarce and infection risk is elevated.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ADVANTAGES & DISADVANTAGES -->
+<section id="advdis">
+  <div class="reveal">
+    <div class="section-label">Comparison</div>
+    <h2 class="section-title">Advantages <span>&amp; Disadvantages</span></h2>
+  </div>
+  <div class="reveal" style="overflow-x:auto;">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>✅ Advantages</th>
+          <th>⚠️ Disadvantages</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="adv-item"><span class="badge plus">+</span><span>Quick and convenient — no need for water or towels to rinse.</span></div></td>
+          <td><div class="adv-item"><span class="badge minus">−</span><span>Not effective against all pathogens — e.g., norovirus, C. diff spores.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="adv-item"><span class="badge plus">+</span><span>Kills 99.9% of bacteria and most common viruses within 30 seconds.</span></div></td>
+          <td><div class="adv-item"><span class="badge minus">−</span><span>Flammable due to high ethanol content; must be stored away from heat/flame.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="adv-item"><span class="badge plus">+</span><span>Portable — easy to carry in bags, pockets, and travel kits.</span></div></td>
+          <td><div class="adv-item"><span class="badge minus">−</span><span>Can cause skin dryness or irritation with very frequent use.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="adv-item"><span class="badge plus">+</span><span>Reduces transmission of infectious diseases in public settings.</span></div></td>
+          <td><div class="adv-item"><span class="badge minus">−</span><span>Toxic if ingested — especially dangerous for children; must be stored safely.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="adv-item"><span class="badge plus">+</span><span>Cost-effective when prepared in bulk using the WHO formulation.</span></div></td>
+          <td><div class="adv-item"><span class="badge minus">−</span><span>Does not remove dirt, heavy metals, or pesticide residues from hands.</span></div></td>
+        </tr>
+        <tr>
+          <td><div class="adv-item"><span class="badge plus">+</span><span>Minimal equipment needed — can be prepared in resource-limited settings.</span></div></td>
+          <td><div class="adv-item"><span class="badge minus">−</span><span>Effectiveness decreases if applied in insufficient quantities or on wet hands.</span></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="reveal">
+    <div class="section-label">Common Questions</div>
+    <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
+  </div>
+  <div class="faq-list reveal">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Why is ethanol used instead of other alcohols?
+        <span class="chevron">▾</span>
+      </button>
+      <div class="faq-a">Ethanol (ethyl alcohol) is preferred because it has proven broad-spectrum antimicrobial activity, is less toxic to skin than methanol or isopropanol at equivalent concentrations, and is accepted by WHO global formulation guidelines. It denatures proteins effectively at 70–80% concentration.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        What is the role of hydrogen peroxide in the formulation?
+        <span class="chevron">▾</span>
+      </button>
+      <div class="faq-a">Hydrogen peroxide (H₂O₂) serves as a preservative rather than an active antiseptic in this formula. At the concentration used (0.125%), it inactivates any bacterial spores that may be present in the bulk ethanol or on the manufacturing equipment, ensuring a sterile final product.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Why is glycerol added to the sanitizer?
+        <span class="chevron">▾</span>
+      </button>
+      <div class="faq-a">Glycerol is a humectant that draws moisture to the skin. Because ethanol can be drying with repeated use, glycerol counteracts this by keeping the skin hydrated, preventing cracking, and improving user compliance with regular hand hygiene habits.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        What minimum alcohol concentration is required for effectiveness?
+        <span class="chevron">▾</span>
+      </button>
+      <div class="faq-a">Research and WHO guidelines indicate that a minimum final concentration of 60–70% ethanol (or 60–65% isopropanol) is required to effectively kill most bacteria, fungi, and enveloped viruses. The WHO formulation achieves approximately 75% final ethanol concentration.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Is hand sanitizer effective against the flu and COVID-19?
+        <span class="chevron">▾</span>
+      </button>
+      <div class="faq-a">Yes. Alcohol-based hand sanitizers containing ≥60% ethanol are effective against enveloped viruses including influenza and SARS-CoV-2. The alcohol disrupts the lipid membrane of these viruses, rendering them non-infectious. However, non-enveloped viruses like norovirus are more resistant.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        What safety precautions should be followed during preparation?
+        <span class="chevron">▾</span>
+      </button>
+      <div class="faq-a">Always work in a well-ventilated area away from open flames or sparks, as ethanol is highly flammable. Wear gloves and lab coat. Avoid inhaling vapours. Keep hydrogen peroxide in its original container away from organic materials. Label all containers clearly and keep out of reach of children.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        How long does homemade hand sanitizer remain effective?
+        <span class="chevron">▾</span>
+      </button>
+      <div class="faq-a">When stored in a sealed container at room temperature away from light and heat, the WHO hand sanitizer formulation remains effective for up to 2–3 years. Effectiveness decreases if the container is left open, as ethanol evaporates over time, reducing the active concentration.</div>
+    </div>
+  </div>
+</section>
+
+<!-- MECHANISM -->
+<section id="mechanism">
+  <div class="reveal">
+    <div class="section-label">Chemistry</div>
+    <h2 class="section-title">Chemical Reaction <span>&amp; Mechanism</span></h2>
+  </div>
+  <div class="mech-grid reveal">
+    <div class="mech-card">
+      <div class="micon">🦠</div>
+      <h4>Protein Denaturation</h4>
+      <p>Ethanol disrupts hydrogen bonds and hydrophobic interactions within bacterial proteins and enzymes. This causes irreversible unfolding (denaturation), rendering the proteins non-functional and killing the cell.</p>
+    </div>
+    <div class="mech-card">
+      <div class="micon">🔴</div>
+      <h4>Lipid Membrane Disruption</h4>
+      <p>Ethanol dissolves the phospholipid bilayer of microbial cell membranes, increasing permeability. This causes leakage of intracellular contents (ions, amino acids, nucleotides), leading to rapid cell lysis and death.</p>
+    </div>
+    <div class="mech-card">
+      <div class="micon">⚡</div>
+      <h4>DNA Denaturation</h4>
+      <p>At high concentrations, ethanol penetrates the cell and disrupts nucleic acid structure, preventing DNA replication and transcription. This halts cell reproduction entirely, stopping the spread of infection.</p>
+    </div>
+    <div class="mech-card">
+      <div class="micon">🌊</div>
+      <h4>Oxidative Damage (H₂O₂)</h4>
+      <p>Hydrogen peroxide generates reactive oxygen species (ROS) — particularly hydroxyl radicals — that oxidise DNA, proteins, and lipids inside microbial cells, causing wide-spectrum antimicrobial damage.</p>
+    </div>
+  </div>
+  <div class="reaction-box reveal">
+    <div class="rlabel">Key Chemical Reactions</div>
+    <div class="rtext">
+      C₂H₅OH (Ethanol) + Microbial Proteins → Denatured Proteins + Cell Death<br><br>
+      H₂O₂ → H₂O + [O]  &nbsp; (Nascent oxygen — highly reactive)<br><br>
+      [O] + Microbial DNA/Lipids → Oxidised &amp; Non-functional Biomolecules
+    </div>
+    <small>Mechanism based on WHO Technical Report Series &amp; standard biochemistry literature</small>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Chemistry Prototyping Project · 2026 &nbsp;·&nbsp; <span>Preparation of Hand Sanitizer</span> &nbsp;·&nbsp; Pratiksha · Sonal · Rutuja</p>
+  <p style="margin-top:.4rem;">Formulation based on WHO recommended hand sanitizer guidelines</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal, .t-step').forEach(el => observer.observe(el));
+
+  // FAQ accordion
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = btn.classList.contains('open');
+    document.querySelectorAll('.faq-q').forEach(b => {
+      b.classList.remove('open');
+      b.nextElementSibling.classList.remove('open');
+    });
+    if (!isOpen) {
+      btn.classList.add('open');
+      answer.classList.add('open');
+    }
+  }
+
+  // Stagger timeline steps
+  const steps = document.querySelectorAll('.t-step');
+  steps.forEach((s, i) => s.style.transitionDelay = `${i * 0.1}s`);
+</script>
+</body>
+</html>
